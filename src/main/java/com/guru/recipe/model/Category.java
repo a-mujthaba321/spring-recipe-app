@@ -3,18 +3,18 @@ package com.guru.recipe.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
-public class Note {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    private Recipe recipe;
+    private String name;
 
-    @Lob
-    private String recipeNote;
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes;
 }
