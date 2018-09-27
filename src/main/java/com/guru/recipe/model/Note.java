@@ -1,10 +1,12 @@
 package com.guru.recipe.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Note {
 
@@ -16,5 +18,5 @@ public class Note {
     private Recipe recipe;
 
     @Lob
-    private String recipeNote;
+    private String recipeNotes;
 }

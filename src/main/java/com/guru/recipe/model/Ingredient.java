@@ -1,12 +1,14 @@
 package com.guru.recipe.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -19,13 +21,28 @@ public class Ingredient {
     private BigDecimal amount;
 
     @ManyToOne
-    private UnitOfMeasure unitOfMeasure;
+    private UnitOfMeasure uom;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+
 
     @ManyToOne
     private Recipe recipe;
+
+    public Ingredient() {
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+        this.recipe = recipe;
+    }
 
 
 }
